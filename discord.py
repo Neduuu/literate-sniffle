@@ -23,7 +23,7 @@ def button_components():
 @bot.event
 async def on_message(message):
     msg = message.content
-    if msg == "hello":
+    if msg == "hello" or 'hey':
     	await message.channel.send("pies are better than cakes. change my mind.")   
     await bot.process_commands(message)
 
