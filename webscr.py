@@ -47,7 +47,7 @@ def returnd():
 def login(driver):
     '''Brightspace login'''
     username = driver.find_element(By.ID,'userNameInput')
-    username.send_keys(os.getenv('USERNAME'))
+    username.send_keys(os.getenv('UNAME'))
     password = driver.find_element(By.ID,'passwordInput')
     password.send_keys(os.getenv('PASSWORD'))
     password.send_keys(Keys.RETURN)
@@ -94,6 +94,7 @@ def add_grade(driver,ids):
     return dfs_s
 
 def removeuseless(ids, driver):
+    '''My degree comes with useful add-on courses but they're not needed as there are no assessments'''
     notneeded = ['94066','84574','94067']
     newids = []
     #remove old tabs
@@ -124,7 +125,7 @@ def removeuseless(ids, driver):
     return newids
             
 def course_grades(dfs):
-    '''Getting '''
+    '''Getting the grades of each available assessment and store in a grades object'''
     g_table = []
     for k,df in enumerate(dfs):
         for table in df:
@@ -168,9 +169,8 @@ def course_grades(dfs):
             except:
                 pass
     
-
 def csv_file():
-    grade_list = [stat,calc,l_prog,comp]
+    '''Storing all course grades in a csv file'''
     frames = []
     beys = []
     for course in grade_list:
@@ -183,7 +183,6 @@ def csv_file():
 def course_info():
     '''Every information regarding the courses '''
     #-----------------Removing assessments not taken in given course---------------
-    grade_list = [stat,calc,l_prog,comp]
     for courses in grade_list:
         courses.remove_assessments()
     #-----------------Inputting assessment weights --------------------------------
@@ -211,6 +210,7 @@ def course_info():
     #----------------
        
 def equal_array():
+    ''' Makes all grades equal arrays to be put in pandas dataframe'''
     grade_list = [stat,calc,l_prog,comp]
     for course in grade_list:
         course.equal_lists()

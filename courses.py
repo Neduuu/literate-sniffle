@@ -12,8 +12,8 @@ class Grades:
             'Quizzes': [],
             'Tutorials': [],
             'Assignments':[],
-            #'PP': [],
-            #'PS' : [],
+            'PP': [],
+            'PS' : [],
             'SE' : []
         }
         self.weighed = 0
@@ -45,7 +45,7 @@ class Grades:
         else:
             score = sum(self.assessments.get(key))
             ave = score/len(self.assessments[key])
-            return f'The average of {key} is {ave:.2f}'
+            return f'Average: {ave:.2f}'
         
     def remove_assessments(self):
         '''Remove all irrelevat assessment for a course'''
